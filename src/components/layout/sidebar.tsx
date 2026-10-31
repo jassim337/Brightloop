@@ -10,15 +10,17 @@ import {
 import { cn } from "@/lib/utils";
 import { NAVIGATION_BY_ROLE, type UserRole } from "@/lib/navigation";
 
-// TODO: Replace this temporary role with the authenticated user's role.
-const CURRENT_ROLE: UserRole = "ADMIN";
+export interface DashboardSidebarContentProps {
+  role?: UserRole;
+  onNavigate?: () => void;
+}
 
 export function DashboardSidebarContent({
+  role = "ADMIN",
   onNavigate,
-}: {
-  onNavigate?: () => void;
-}) {
+}: DashboardSidebarContentProps) {
   const pathname = usePathname();
+  const navItems = NAVIGATION_BY_ROLE[role] ?? NAVIGATION_BY_ROLE.ADMIN;
 
   return (
     <div className="flex h-full flex-col">
@@ -43,7 +45,7 @@ export function DashboardSidebarContent({
           Platform
         </div>
         <nav aria-label="Primary navigation" className="space-y-1">
-          {NAVIGATION_BY_ROLE[CURRENT_ROLE].map((item) => {
+          {navItems.map((item) => {
             const IconComponent = item.icon;
             const route = item.href.split("#")[0];
             const isActive =
@@ -102,10 +104,14 @@ export function DashboardSidebarContent({
   );
 }
 
-export function DashboardSidebar() {
+export interface DashboardSidebarProps {
+  role?: UserRole;
+}
+
+export function DashboardSidebar({ role = "ADMIN" }: DashboardSidebarProps) {
   return (
-    <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-slate-200 bg-white/95 backdrop-blur-md md:flex dark:border-slate-800 dark:bg-slate-900/95">
-      <DashboardSidebarContent />
+    <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-slate-200 bg-white/95 backdrop-blur-md md:flex print:hidden dark:border-slate-800 dark:bg-slate-900/95">
+      <DashboardSidebarContent role={role} />
     </aside>
   );
 }

@@ -28,7 +28,7 @@ interface DemoInvoice {
 
 const invoices: DemoInvoice[] = [
   { number: "INV-2026-001", customer: "Northstar Labs", amount: "$1,240", status: "PAID" },
-  { number: "INV-2026-002", customer: "Acme Studio", amount: "$860", status: "SENT" },
+  { number: "INV-2026-002", customer: "Acme Studio", amount: "$860", status: "PARTIALLY_PAID" },
   { number: "INV-2026-003", customer: "Willow Health", amount: "$2,400", status: "OVERDUE" },
   { number: "INV-2026-004", customer: "Orbit Analytics", amount: "$1,150", status: "CONFIRMED" },
   { number: "INV-2026-005", customer: "Cedar Works", amount: "$740", status: "DRAFT" },
@@ -50,10 +50,10 @@ const columns: DataTableColumn<DemoInvoice>[] = [
 const statuses: InvoiceStatus[] = [
   "DRAFT",
   "CONFIRMED",
-  "SENT",
+  "PARTIALLY_PAID",
   "PAID",
-  "CANCELLED",
   "OVERDUE",
+  "CANCELLED",
 ];
 
 export default function ComponentsShowcasePage() {
@@ -94,6 +94,8 @@ export default function ComponentsShowcasePage() {
           {statuses.map((status) => (
             <StatusBadge key={status} status={status} />
           ))}
+          {/* Unknown status fallback showcase */}
+          <StatusBadge status="PENDING_REVIEW" />
         </CardContent>
       </Card>
 

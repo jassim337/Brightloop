@@ -7,12 +7,20 @@ import { Bell, Search, ExternalLink, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { DashboardSidebarContent } from "@/components/layout/sidebar";
+import type { UserRole } from "@/lib/navigation";
 
-export function DashboardHeader() {
+export interface DashboardHeaderProps {
+  role?: UserRole;
+  userEmail?: string | null;
+}
+
+export function DashboardHeader({ role = "ADMIN", userEmail }: DashboardHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const roleLabel = role.charAt(0) + role.slice(1).toLowerCase();
+
   return (
-    <header className="sticky top-0 z-20 flex h-16 w-full items-center justify-between gap-2 border-b border-slate-200/80 bg-white/80 px-3 backdrop-blur-md sm:px-6 dark:border-slate-800 dark:bg-slate-900/80">
+    <header className="sticky top-0 z-20 flex h-16 w-full items-center justify-between gap-2 border-b border-slate-200/80 bg-white/80 px-3 backdrop-blur-md sm:px-6 print:hidden dark:border-slate-800 dark:bg-slate-900/80">
       {/* Search Input Bar */}
       <div className="flex min-w-0 flex-1 items-center gap-3 md:flex-initial md:w-80">
         <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
@@ -28,7 +36,7 @@ export function DashboardHeader() {
             </Button>
           </SheetTrigger>
           <SheetContent title="Main navigation" closeLabel="Close navigation">
-            <DashboardSidebarContent onNavigate={() => setMenuOpen(false)} />
+            <DashboardSidebarContent role={role} onNavigate={() => setMenuOpen(false)} />
           </SheetContent>
         </Sheet>
         <div className="relative w-full">
@@ -64,13 +72,13 @@ export function DashboardHeader() {
         {/* User Workspace Avatar */}
         <div className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-500 to-purple-600 font-semibold text-xs text-white">
-            BL
+            {role ? role.slice(0, 2) : "BL"}
           </div>
           <div className="hidden text-left sm:block">
             <p className="text-xs font-semibold text-slate-800 dark:text-slate-200">
-              Brightloop Admin
+              {userEmail || `Brightloop ${roleLabel}`}
             </p>
-            <p className="text-[11px] text-slate-400">Owner Workspace</p>
+            <p className="text-[11px] text-slate-400">{roleLabel} Workspace</p>
           </div>
         </div>
       </div>
