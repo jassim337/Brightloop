@@ -1,5 +1,4 @@
-import React from "react";
-import { Users, UserPlus, Search } from "lucide-react";
+import { Users, UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";

@@ -78,7 +78,7 @@ export function RevenueChart() {
                   color: "#f8fafc",
                   fontSize: "12px",
                 }}
-                formatter={(value: any) => [`$${Number(value).toLocaleString()}`, "MRR"]}
+                formatter={(value) => [`$${Number(value ?? 0).toLocaleString()}`, "MRR"]}
               />
               <Area
                 type="monotone"

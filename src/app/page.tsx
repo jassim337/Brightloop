@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import {
   Layers,
@@ -7,11 +6,8 @@ import {
   ShieldCheck,
   Zap,
   ArrowRight,
-  BarChart3,
-  CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 export default function LandingPage() {
   return (
