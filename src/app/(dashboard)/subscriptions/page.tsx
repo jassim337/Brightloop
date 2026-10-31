@@ -1,49 +1,40 @@
-import React from "react";
-import { CreditCard, Plus, Filter } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import Link from 'next/link';
 
-export default function SubscriptionsPage() {
+export default function SubscriptionsDashboard() {
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div className="flex flex-col w-full h-full p-8">
+      <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
-            Subscriptions
-          </h1>
-          <p className="text-sm text-slate-500">
-            Monitor, filter, and manage all active customer recurring subscriptions.
-          </p>
+          <h1 className="text-2xl font-bold text-white">Subscriptions</h1>
+          <p className="text-sm text-slate-400">Monitor, filter, and manage all active customer recurring subscriptions.</p>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="gap-2">
-            <Filter className="h-4 w-4" />
-            <span>Filter</span>
-          </Button>
-          <Button size="sm" className="gap-2">
-            <Plus className="h-4 w-4" />
-            <span>Create Subscription</span>
-          </Button>
+        <div className="flex gap-3">
+          <button className="px-4 py-2 text-sm font-medium text-white border border-slate-700 rounded-md bg-slate-800 hover:bg-slate-700">
+            Filter
+          </button>
+          
+          {/* 
+            The updated routing connection. 
+            By using Next.js Link, this will now push the user to the [id] dynamic route 
+            where 'new' acts as the id parameter. 
+          */}
+          <Link 
+            href="/subscriptions/new" 
+            className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 transition-colors flex items-center gap-2"
+          >
+            + Create Subscription
+          </Link>
         </div>
       </div>
 
-      <Card>
-        <CardContent className="flex min-h-[300px] flex-col items-center justify-center p-8 text-center">
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50 text-indigo-600 dark:bg-indigo-950 dark:text-indigo-400">
-            <CreditCard className="h-6 w-6" />
-          </div>
-          <h3 className="mt-4 text-base font-semibold text-slate-900 dark:text-white">
-            Subscription Management Engine
-          </h3>
-          <p className="mt-2 max-w-sm text-xs text-slate-500">
-            Full Prisma data models, Stripe webhook sync, and billing lifecycle controls will be integrated in Phase 1 & 2.
-          </p>
-          <div className="mt-4">
-            <Badge variant="secondary">Phase 0 Architecture Ready</Badge>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="flex flex-col items-center justify-center w-full h-96 bg-[#0f111a] border border-slate-800 rounded-xl shadow-sm">
+        <div className="w-12 h-12 mb-4 bg-indigo-500/20 text-indigo-400 rounded-full flex items-center justify-center">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+        </div>
+        <h3 className="text-lg font-medium text-white mb-2">Subscription Management Engine</h3>
+        <p className="text-sm text-slate-400 max-w-md text-center mb-6">Full Prisma data models, Stripe webhook sync, and billing lifecycle controls will be integrated in Phase 1 & 2.</p>
+        <span className="px-3 py-1 text-xs font-medium text-slate-300 bg-slate-800 rounded-full">Phase 0 Architecture Ready</span>
+      </div>
     </div>
   );
 }
