@@ -1,4 +1,4 @@
-import { generateSubscriptionNumber } from '../utils';
+import { generateSubscriptionNumber } from '../../utils';
 
 export interface PlanTemplate {
   id: string;
