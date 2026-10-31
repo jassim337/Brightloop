@@ -4,34 +4,24 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  LayoutDashboard,
-  CreditCard,
-  Users,
-  Package,
-  Settings,
-  FileText,
-  Activity,
   Layers,
   ChevronRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { DASHBOARD_NAV_ITEMS } from "@/lib/constants";
+import { NAVIGATION_BY_ROLE, type UserRole } from "@/lib/navigation";
 
-const ICON_MAP = {
-  LayoutDashboard,
-  CreditCard,
-  Users,
-  Package,
-  Settings,
-  FileText,
-  BarChart3: Activity,
-};
+// TODO: Replace this temporary role with the authenticated user's role.
+const CURRENT_ROLE: UserRole = "ADMIN";
 
-export function DashboardSidebar() {
+export function DashboardSidebarContent({
+  onNavigate,
+}: {
+  onNavigate?: () => void;
+}) {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-slate-200 bg-white/95 backdrop-blur-md md:flex dark:border-slate-800 dark:bg-slate-900/95">
+    <div className="flex h-full flex-col">
       {/* Brand Header */}
       <div className="flex h-16 items-center gap-3 border-b border-slate-200 px-6 dark:border-slate-800">
         <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-cyan-400 text-white shadow-md shadow-indigo-500/25">
@@ -52,15 +42,19 @@ export function DashboardSidebar() {
         <div className="mb-3 px-2 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
           Platform
         </div>
-        <nav className="space-y-1">
-          {DASHBOARD_NAV_ITEMS.map((item) => {
-            const IconComponent = ICON_MAP[item.iconName] || LayoutDashboard;
-            const isActive = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
+        <nav aria-label="Primary navigation" className="space-y-1">
+          {NAVIGATION_BY_ROLE[CURRENT_ROLE].map((item) => {
+            const IconComponent = item.icon;
+            const route = item.href.split("#")[0];
+            const isActive =
+              pathname === route ||
+              (route !== "/dashboard" && pathname.startsWith(route));
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={onNavigate}
                 className={cn(
                   "group flex items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-150",
                   isActive
@@ -104,6 +98,14 @@ export function DashboardSidebar() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+export function DashboardSidebar() {
+  return (
+    <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-slate-200 bg-white/95 backdrop-blur-md md:flex dark:border-slate-800 dark:bg-slate-900/95">
+      <DashboardSidebarContent />
     </aside>
   );
 }

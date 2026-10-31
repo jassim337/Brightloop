@@ -1,1 +1,137 @@
 @import "tailwindcss";
+
+:root {
+  /* Brand */
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+
+  /* General */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #6366f1;
+
+  /* Status colours */
+  --success: #16a34a;
+  --success-background: #dcfce7;
+
+  --warning: #d97706;
+  --warning-background: #fef3c7;
+
+  --danger: #dc2626;
+  --danger-background: #fee2e2;
+
+  --info: #2563eb;
+  --info-background: #dbeafe;
+}
+
+.dark {
+  --background: #020617;
+  --foreground: #f8fafc;
+
+  --card: #0f172a;
+  --card-foreground: #f8fafc;
+
+  --border: #1e293b;
+  --input: #334155;
+  --ring: #818cf8;
+
+  --success: #4ade80;
+  --success-background: #052e16;
+
+  --warning: #fbbf24;
+  --warning-background: #451a03;
+
+  --danger: #f87171;
+  --danger-background: #450a0a;
+
+  --info: #60a5fa;
+  --info-background: #172554;
+}
+
+@keyframes dialog-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-overlay-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes dialog-content-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes dialog-content-out {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+}
+
+@keyframes sheet-slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes sheet-slide-out-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+[data-state="open"].dialog-overlay {
+  animation: dialog-overlay-in 180ms ease-out;
+}
+
+[data-state="closed"].dialog-overlay {
+  animation: dialog-overlay-out 150ms ease-in;
+}
+
+[data-state="open"].dialog-content {
+  animation: dialog-content-in 180ms ease-out;
+}
+
+[data-state="closed"].dialog-content {
+  animation: dialog-content-out 150ms ease-in;
+}
+
+[data-state="open"].sheet-content-left {
+  animation: sheet-slide-in-left 220ms ease-out;
+}
+
+[data-state="closed"].sheet-content-left {
+  animation: sheet-slide-out-left 180ms ease-in;
+}
