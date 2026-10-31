@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Bell, Search, ExternalLink, Sparkles } from "lucide-react";
+import { Bell, Search, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function DashboardHeader() {
