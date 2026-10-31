@@ -1,7 +1,5 @@
-import React from "react";
-import { Settings, Shield, Bell, Key, Database } from "lucide-react";
+import { Key, Database } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 
 export default function SettingsPage() {
   return (
