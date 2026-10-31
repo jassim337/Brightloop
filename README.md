@@ -471,8 +471,8 @@ Our development is focused on building a reliable subscription management and bi
 | Team Member | Primary Responsibility |
 |---|---|
 | Malavika | Billing engine, database integration, invoice generation |
-| Jasim | Authentication, roles, product catalog, plans, tax configuration |
-| Sharma | Quotations, subscription lifecycle, discounts |
+| Jassim | Authentication, roles, product catalog, plans, tax configuration |
+| Shahmas | Quotations, subscription lifecycle, discounts |
 | Nihal | Invoice interface, payments, overdue tracking, finance dashboard |
 
 ---
