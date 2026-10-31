@@ -1,6 +1,6 @@
-import React from "react";
-import { DashboardSidebar } from "@/components/layout/sidebar";
-import { DashboardHeader } from "@/components/layout/header";
+ import { Suspense } from 'react';
+import { DashboardSidebar } from '@/components/layout/sidebar';
+import { DashboardHeader } from '@/components/layout/header';
 
 export default function DashboardLayout({
   children,
@@ -8,11 +8,17 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-slate-50/50 text-slate-900 dark:bg-slate-950 dark:text-slate-50">
-      <DashboardSidebar />
-      <div className="flex flex-col md:pl-64">
+    <div className="flex min-h-screen">
+      <Suspense fallback={<aside className="hidden w-64 border-r border-slate-800 bg-slate-900/95 md:flex fixed inset-y-0 left-0" />}>
+        <DashboardSidebar />
+      </Suspense>
+      
+      {/* ADDED md:pl-64 HERE to offset the fixed sidebar */}
+      <div className="flex flex-1 flex-col md:pl-64 w-full">
         <DashboardHeader />
-        <main className="flex-1 p-6 md:p-8">{children}</main>
+        <main className="flex-1 bg-[#0f111a]">
+          {children}
+        </main>
       </div>
     </div>
   );
